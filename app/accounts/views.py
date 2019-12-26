@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
@@ -50,7 +50,7 @@ class LogInView(TemplateView):
                 )
         if user is not None:
             login(request, user)
-            return redirect('')
+            return redirect('sender:index')
         else:
             messages.error(request, 'Bad username or password.')
         return redirect('accounts:login')
