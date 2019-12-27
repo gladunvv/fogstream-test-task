@@ -34,7 +34,7 @@ SECRET_KEY = '1)tnv2#u7)%beqzw^)$kfsf7dp#l%_dskvg7vayc9m+597v+p-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -133,6 +133,17 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# Email settings
+
+ADMINS = [(env('ADMIN_NAME'), env('ADMIN_MAIL'))]
+EMAIL_USE_TLS = True
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = 587
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+EMAIL_BACKEND = env('EMAIL_BACKEND')
 
 
 # Static files (CSS, JavaScript, Images)
