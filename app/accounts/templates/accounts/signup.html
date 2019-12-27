@@ -1,3 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Signin{% endblock %}
+
+{% block content %}
+
 <form method="POST">
     {% csrf_token %}
     {% for field in form %}
@@ -9,5 +15,11 @@
         {% endfor %}
     </p>
     {% endfor %}
-    <button type="submit">Login</button>
+    <button type="submit">Signin</button>
 </form>
+
+<small>
+    You already have an account? <a href="{% url "accounts:login" %}">Login</a>
+</small>
+
+{% endblock %}

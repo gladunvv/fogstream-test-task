@@ -1,10 +1,7 @@
 {% extends 'base.html' %}
+{% block title %}Admin message{% endblock %}
 {% block content %}
-{% if error %}
-<p style="color: red">
-    {{ error }}
-</p>
-{% endif %}
+
 <form method="POST">
     {% csrf_token %}
 
@@ -12,7 +9,6 @@
     <p>
         {{ field.label_tag }}<br>
         {{ field }}
-
         {% for error in field.errors %}
         <p style="color: red">
             {{ error }}
@@ -20,8 +16,12 @@
         {% endfor %}
     </p>
     {% endfor %}
-
-    <button type="submit">Login</button>
+    {% if error_message %}
+    <p style="color: red">
+        {{ error_message }}
+    </p>
+    {% endif %}
+    <button type="submit">Send</button>
 </form>
 
 {% endblock %}
