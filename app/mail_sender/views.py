@@ -2,13 +2,14 @@ import sys
 
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from mail_sender.forms import MessageForm
 from mail_sender.models import MessageForAdmin
 from mail_sender.mail_send import message_send
 
 
-class MessageForAdminView(TemplateView):
+class MessageForAdminView(LoginRequiredMixin, TemplateView):
 
     template_name = 'mail_sender/sender.html'
 
@@ -37,7 +38,7 @@ class MessageForAdminView(TemplateView):
                 message.status = 3
                 message.save()
                 exception_type = type(ex).__name__
-                sys.stdout.write(f'Message error: {exception_type}')
+                print(f'Message error: {exception_type}')
             else:
                 message.send()
                 context = {
