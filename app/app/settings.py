@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import sys
 import environ
 
 
@@ -100,6 +101,14 @@ DATABASES = {
         'PORT': env('DB_PORT'),
     }
 }
+
+# Test settings database
+
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        }
+
 
 
 # Password validation

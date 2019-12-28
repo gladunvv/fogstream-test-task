@@ -45,15 +45,15 @@ class LogInView(TemplateView):
         if form.is_valid():
             user = authenticate(
                 request,
-                username=username, 
+                username=username,
                 password=password
                 )
-        if user is not None:
             login(request, user)
             return redirect('sender:index')
-        else:
-            messages.error(request, 'Bad username or password.')
-        return redirect('accounts:login')
+        context = {
+            'form': form,
+        }
+        return render(request, self.template_name, context)
 
 
 class LogOutView(TemplateView):

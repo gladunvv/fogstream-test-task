@@ -16,12 +16,13 @@
         {% endfor %}
     </p>
     {% endfor %}
-    {% if error_message %}
-    <p style="color: red">
-        {{ error_message }}
-    </p>
+
+    {% if error %}
+        <p style="color: red">{{ error }}</p>
     {% endif %}
+
     <button type="submit">Send</button>
 </form>
+
 
 {% endblock %}

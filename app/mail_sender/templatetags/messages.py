@@ -5,7 +5,7 @@ from mail_sender.models import MessageForAdmin
 register = template.Library()
 
 @register.inclusion_tag('messages.html', takes_context=True)
-def messages(context, menu):
+def messages():
     message_done = MessageForAdmin.objects.all()
     message_error = MessageForAdmin.objects.filter(status=3)
     context = {
