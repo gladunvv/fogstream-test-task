@@ -105,11 +105,11 @@ DATABASES = {
     },
     'postgres': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASS'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT')
+        'NAME': env('DB_NAME', default=None),
+        'USER': env('DB_USER', default=None),  
+        'PASSWORD': env('DB_PASS', default=None),
+        'HOST': env('DB_HOST', default=None),
+        'PORT': env('DB_PORT', default=None)
     }
 }
 
@@ -149,14 +149,14 @@ USE_TZ = True
 
 # Email settings
 
-ADMINS = [(env('ADMIN_NAME'), env('ADMIN_MAIL'))]
+ADMINS = [(env('ADMIN_NAME', default=None), env('ADMIN_MAIL', default=None))]
 EMAIL_USE_TLS = True
-EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_HOST = env('EMAIL_HOST', default=None)
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
-EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default=None)
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default=None)
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default=None)
+EMAIL_BACKEND = env('EMAIL_BACKEND', default=None)
 
 
 # Static files (CSS, JavaScript, Images)
