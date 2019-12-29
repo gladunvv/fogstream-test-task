@@ -144,10 +144,10 @@ USE_TZ = True
 
 # Email settings
 
-ADMINS = [x.split(':') for x in env.list('DJANGO_ADMINS', default=None)]
-EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=None)
+ADMINS = [x.split(':') for x in env.list('DJANGO_ADMINS', default=[])]
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
 EMAIL_HOST = env.str('EMAIL_HOST', default=None)
-EMAIL_PORT = env.int('EMAIL_PORT', default=None)
+EMAIL_PORT = env.int('EMAIL_PORT', default=587)
 EMAIL_HOST_USER = env.str('EMAIL_HOST_USER', default=None)
 EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD', default=None)
 DEFAULT_FROM_EMAIL = env.str('DEFAULT_FROM_EMAIL', default=None)

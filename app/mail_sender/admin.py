@@ -1,4 +1,3 @@
-from django.contrib.admin import AdminSite
 from django.contrib import admin
 from mail_sender.models import MessageForAdmin
 

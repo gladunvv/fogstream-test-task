@@ -1,5 +1,4 @@
 from django.urls import reverse
-from django.core import exceptions
 from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
@@ -11,12 +10,14 @@ LOGOUT_URL = reverse('accounts:logout')
 
 INDEX_PAGE_URL = reverse('sender:index')
 
+
 def create_user(*args, **kwargs):
     context = {
         'username': 'newuser',
         'password': 'newpass1234',
     }
     return get_user_model().objects.create_user(**context)
+
 
 class AccountsTests(TestCase):
 
@@ -33,7 +34,7 @@ class AccountsTests(TestCase):
             'password1': 'newpass1234',
             'password2': 'newpass1234'
         }
-        res = self.client.post(SIGNUP_URL, context, follow=True)      
+        res = self.client.post(SIGNUP_URL, context, follow=True)
         user = get_user_model().objects.get(username=context['username'])
         self.assertEqual(res.status_code, 200)
         self.assertEqual(user.username, context['username'])
@@ -45,7 +46,13 @@ class AccountsTests(TestCase):
             'password2': 'newpass1234'
         }
         res = self.client.post(SIGNUP_URL, context, follow=True)
-        self.assertRedirects(res, LOGIN_URL, status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+        self.assertRedirects(
+            res,
+            LOGIN_URL,
+            status_code=302,
+            target_status_code=200,
+            msg_prefix='',
+            fetch_redirect_response=True)
 
     def test_signup_failed_password(self):
         context = {
@@ -53,18 +60,15 @@ class AccountsTests(TestCase):
             'password1': 'newpass1234',
             'password2': 'newpass4321'
         }
-        res = self.client.post(SIGNUP_URL, context, follow=True)
-
         with self.assertRaises(get_user_model().DoesNotExist):
             get_user_model().objects.get(username=context['username'])
-        
+
     def test_signup_failed_username(self):
         context = {
             'username': '',
             'password1': 'newpass1234',
             'password2': 'newpass1234'
         }
-        res = self.client.post(SIGNUP_URL, context, follow=True)
         with self.assertRaises(get_user_model().DoesNotExist):
             get_user_model().objects.get(username=context['username'])
 
@@ -87,7 +91,7 @@ class AccountsTests(TestCase):
         }
         form = UserCreationForm(context)
         self.assertFalse(form.is_valid())
-        self.assertDictEqual(form.errors, {'password2':['The two password fields didn’t match.']})
+        self.assertDictEqual(form.errors, {'password2': ['The two password fields didn’t match.']})
 
     def test_login_get(self):
         res = self.client.get(LOGIN_URL)
@@ -119,7 +123,13 @@ class AccountsTests(TestCase):
         }
         create_user()
         res = self.client.post(LOGIN_URL, context, follow=True)
-        self.assertRedirects(res, INDEX_PAGE_URL, status_code=302, target_status_code=200, msg_prefix='', fetch_redirect_response=True)
+        self.assertRedirects(
+            res,
+            INDEX_PAGE_URL,
+            status_code=302,
+            target_status_code=200,
+            msg_prefix='',
+            fetch_redirect_response=True)
 
     def test_logout(self):
         context = {

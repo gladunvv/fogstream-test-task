@@ -37,7 +37,6 @@ class LogInView(TemplateView):
         }
         return render(request, self.template_name, context)
 
-
     def post(self, request, *args, **kwargs):
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
