@@ -14,4 +14,4 @@ def message_send(message_data, *args, **kwargs):
     })
     mail_admins(mail_subject, message, html_message=message)
 
-    return 'success'
+    return mail_subject

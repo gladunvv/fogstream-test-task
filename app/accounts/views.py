@@ -40,9 +40,9 @@ class LogInView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         form = AuthenticationForm(request, data=request.POST)
-        username = request.POST.get('username')
-        password = request.POST.get('password')
         if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
             user = authenticate(
                 request,
                 username=username,
@@ -57,6 +57,7 @@ class LogInView(TemplateView):
 
 
 class LogOutView(TemplateView):
+
     def get(self, request):
         logout(request)
         return redirect('accounts:login')

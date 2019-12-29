@@ -38,13 +38,14 @@ class MessageForAdminView(LoginRequiredMixin, TemplateView):
                 message.status = 3
                 message.save()
                 exception_type = type(ex).__name__
-                print(f'Message error: {exception_type}')
+                exception_value = list(ex.args)
+                print(f'Message error: {exception_type}\n Traceback except: {exception_value}')
             else:
                 message.send()
                 context = {
                     'form': form,
                 }
-                return render(request, self.template_name, context)       
+                return render(request, self.template_name, context)
         context = {
             'form': form,
             'error': 'Error send, sorry, something went wrong'

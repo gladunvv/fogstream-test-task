@@ -5,11 +5,11 @@ from mail_sender.models import MessageForAdmin
 register = template.Library()
 
 @register.inclusion_tag('messages.html', takes_context=True)
-def messages():
+def messages(context, message):
     message_done = MessageForAdmin.objects.all()
-    message_error = MessageForAdmin.objects.filter(status=3)
-    context = {
-        'message_done': len(message_done),
-        'message_error': len(message_error)
+    message_error = message_done.filter(status=3)
+    message_count = {
+        'message_done': message_done.count(),
+        'message_error': message_error.count()
     }
-    return context
+    return message_count

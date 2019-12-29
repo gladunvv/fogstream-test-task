@@ -15,15 +15,13 @@ import sys
 import environ
 
 
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 # set casting, default value
 env = environ.Env(DEBUG=(bool, False))
 
 # reading .env file
-
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
@@ -93,17 +91,13 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 # Test settings database
 
-# if 'test' in sys.argv:
-#     DATABASES['default'] = {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         }
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        }
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
-    },
-    'postgres': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': env('DB_NAME', default=None),
         'USER': env('DB_USER', default=None),  
@@ -149,14 +143,14 @@ USE_TZ = True
 
 # Email settings
 
-ADMINS = [(env('ADMIN_NAME', default=None), env('ADMIN_MAIL', default=None))]
-EMAIL_USE_TLS = True
-EMAIL_HOST = env('EMAIL_HOST', default=None)
-EMAIL_PORT = 587
-EMAIL_HOST_USER = env('EMAIL_HOST_USER', default=None)
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default=None)
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default=None)
-EMAIL_BACKEND = env('EMAIL_BACKEND', default=None)
+ADMINS = [x.split(':') for x in env.list('DJANGO_ADMINS', default=None)]
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=None)
+EMAIL_HOST = env.str('EMAIL_HOST', default=None)
+EMAIL_PORT = env.int('EMAIL_PORT', default=None)
+EMAIL_HOST_USER = env.str('EMAIL_HOST_USER', default=None)
+EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD', default=None)
+DEFAULT_FROM_EMAIL = env.str('DEFAULT_FROM_EMAIL', default=None)
+EMAIL_BACKEND = env.str('EMAIL_BACKEND', default=None)
 
 
 # Static files (CSS, JavaScript, Images)

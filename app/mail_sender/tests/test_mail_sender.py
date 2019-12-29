@@ -80,7 +80,7 @@ class MailSenderTests(TestCase):
         }
         message = MessageForAdmin.objects.create(**context)
         status = message_send(message)
-        self.assertEqual(status, 'success')
+        self.assertEqual(status, f'Message from {user}')
 
     def test_message_post_invalid_data(self):
         create_user()

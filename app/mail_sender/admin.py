@@ -8,4 +8,4 @@ class EmailAdmin(admin.ModelAdmin):
     list_display = ('author', 'status', 'date_send')
     search_fields = ('theme', 'author')
     list_filter = ('status',)
-    readonly_fields = ('status',)
+    readonly_fields = ('status', 'date_send')

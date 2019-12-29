@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
-{% block title %}Admin message{% endblock %}
-{% block content %}
 
+{% block title %}Admin message{% endblock %}
+
+{% block content %}
+<h1>Message to admin</h1>
 <form method="POST">
     {% csrf_token %}
 

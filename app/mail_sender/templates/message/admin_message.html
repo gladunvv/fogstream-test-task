@@ -1,12 +1,19 @@
 {% autoescape off %}
+
     <h1>
         Message from {{author}}
     </h1>
-    <p>
-        Theme: <br> {{theme}}
+    <span style="font-size: 20px; font-weight: 700;">
+        Theme:
+    </span> 
+    <p style="font-size: 16px;">
+        {{theme}}
     </p>
-    <p>
-        Text: <br> {{text}}
+    <span style="font-size: 20px; font-weight: 700;">
+        Text: 
+    </span>
+    <p style="font-size: 16px;">
+        {{text}}
     </p>
 
 {% endautoescape %}

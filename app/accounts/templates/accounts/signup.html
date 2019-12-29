@@ -3,7 +3,7 @@
 {% block title %}Signin{% endblock %}
 
 {% block content %}
-
+<h1>SIGNUP</h1>
 <form method="POST">
     {% csrf_token %}
     {% for field in form %}
@@ -15,7 +15,7 @@
         {% endfor %}
     </p>
     {% endfor %}
-    <button type="submit">Signin</button>
+    <button type="submit">Signup</button>
 </form>
 
 <small>
