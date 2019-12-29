@@ -38,7 +38,6 @@
 + coverage==5.0.1
 + django-environ==0.4.5
 + psycopg2==2.8.4
-+ asgiref==3.2.3
 + pytz==2019.3
 + sqlparse==0.3.0
 
