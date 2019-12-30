@@ -45,8 +45,8 @@
 * Перед запуском необходимо локально создать и настроить базу данных(Postgresql), а также в корне проекта создать файл .env и заполнить его **данными для доступа к базе**, а также **данными для отправки почты** пример заполнения в [.env.example](https://github.com/gladunvv/library-api/blob/master/app/.env.example)
 
 ```bash
-git@github.com:gladunvv/fogstream-test-task.git
-fogstream-test-task
+git clone git@github.com:gladunvv/fogstream-test-task.git
+cd fogstream-test-task
 pip install virtualenv
 python3 -m venv venv
 source venv/bin/activate
